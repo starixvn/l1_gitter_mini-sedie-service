@@ -9,6 +9,8 @@ RUN mkdir /app && chown node:node /app
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN npm run reg
+RUN yarn cache clean
+RUN yarn --update-checksums
 RUN yarn install --production
 ENV PATH /app/node_modules/.bin:$PATH
 
