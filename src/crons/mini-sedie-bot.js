@@ -94,12 +94,9 @@ export default class MiniSeDieBot extends Core.Crons.BaseBot {
 
         const underRatioGroups = helpers.arrayHelper.shuffle(betChoiceRatios.filter((data) => data.underBetRatio));
 
-        const choice =
-            underRatioGroups.length > 0
-                ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
-                : this.getRandomChoiceFromGroup(this.mainOpts);
-
-        return choice;
+        return underRatioGroups.length > 0
+            ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
+            : this.getRandomChoiceFromGroup(this.mainOpts);
     }
 
     getMaxBet(bot, choice) {
@@ -139,9 +136,7 @@ export default class MiniSeDieBot extends Core.Crons.BaseBot {
     }
 
     getRandomChoiceFromGroup(group) {
-        const randomIndex = (Math.random() * group.length) >> 0;
-
-        return group[randomIndex];
+        return this.chance.pickone(group);
     }
 
     getTotalAmountOnChoiceGroup(choices) {

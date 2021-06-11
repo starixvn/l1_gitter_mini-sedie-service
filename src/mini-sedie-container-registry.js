@@ -3,8 +3,7 @@ import { Core } from "sc-game-base";
 
 import PlaceBetConsumer from "./consumers/mini-sedie-place-bet-consumer";
 import { MiniSeDieBot, MiniSeDieGameCron } from "./crons";
-import { MiniSeDieBets, MiniSeDieRounds, MiniSeDieTmpBets } from "./models";
-import MiniSeDieRoundQuery from "./query-apis/mini-sedie-round-query";
+import { MiniSeDieBets, MiniSeDieRounds } from "./models";
 
 const { asClass, asValue } = awilix;
 
@@ -15,7 +14,6 @@ export default class MiniSeDieContainerRegistry extends Core.ContainerRegistry {
         this.container.register({
             roundsRepository: asValue(MiniSeDieRounds),
             betsRepository: asValue(MiniSeDieBets),
-            tempBetsRepository: asValue(MiniSeDieTmpBets),
         });
     }
 
@@ -33,14 +31,6 @@ export default class MiniSeDieContainerRegistry extends Core.ContainerRegistry {
         this.container.register({
             bot: asClass(MiniSeDieBot).singleton(),
             gameCron: asClass(MiniSeDieGameCron).singleton().proxy(),
-        });
-    }
-
-    registerApis() {
-        super.registerApis();
-
-        this.container.register({
-            roundQuery: asClass(MiniSeDieRoundQuery).singleton(),
         });
     }
 }
