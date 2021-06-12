@@ -156,10 +156,6 @@ export default class MiniSeDieBot extends Core.Crons.BaseBot {
         return amount <= this.getMinBet() * this.smallTicketValueRatio;
     }
 
-    getTotalBetAmount(currentBet) {
-        return currentBet ? this.definition.choices.reduce((total, choice) => total + currentBet[choice], 0) : 0;
-    }
-
     convertAmountToChip(amount) {
         const chipList = constants.chips.filter((chip) => amount / chip >= 1);
 
