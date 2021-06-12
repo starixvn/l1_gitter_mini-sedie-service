@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+    <file path="G:\Projects\L1\mini-sedie-service\src\helpers\__tests__\result-helper.test.js">
+        <testCase name="getSettlementResult tests should return odd and white3 if results have ONE red" duration="3"/>
+        <testCase name="getSettlementResult tests should return even if results have TWO reds" duration="1"/>
+        <testCase name="getSettlementResult tests should return odd and red3 if results have THREE reds" duration="0"/>
+        <testCase name="getSettlementResult tests should return even and red4 if results have FOUR reds" duration="0"/>
+        <testCase name="getSettlementResult tests should return even and white4 if results have NO reds" duration="0"/>
+        <testCase name="generateResult tests should return enough results" duration="1"/>
+    </file>
+    <file path="G:\Projects\L1\mini-sedie-service\src\crons\__tests__\mini-sedie-game-cron.test.js">
+        <testCase name="composeBettingTimeValidationCriteria tests should return true time is shakeThePlateTime" duration="2"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should return false time is NOT shakeThePlateTime" duration="1"/>
+    </file>
+    <file path="G:\Projects\L1\mini-sedie-service\src\consumers\__tests__\mini-sedie-place-bet-consumer.test.js">
+        <testCase name="composeBettingTimeValidationCriteria tests should return placeBetNextRound notice if game was disabled" duration="3"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should return cannotPlaceBet notice if bet comes in settlement time" duration="0"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should return placeBetNextRound notice if bet comes in locking bet time" duration="0"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should return placeBetNextRound notice if bet comes in shaking plate time" duration="1"/>
+        <testCase name="composeBettingTimeValidationCriteria tests should not return any failures if valid" duration="0"/>
+    </file>
+    <file path="G:\Projects\L1\mini-sedie-service\src\crons\__tests__\mini-sedie-bot.test.js">
+        <testCase name="MiniSeDieBot tests all bet amount of choices should be zero after initialize" duration="2"/>
+        <testCase name="MiniSeDieBot tests reset should call super.reset" duration="1"/>
+        <testCase name="MiniSeDieBot tests run should call super.run" duration="1"/>
+        <testCase name="MiniSeDieBot tests resetAllBotData should call super.resetAllBotData" duration="0"/>
+        <testCase name="MiniSeDieBot tests getAllBetAmount should return sum of bot bet amount" duration="2"/>
+        <testCase name="MiniSeDieBot tests isSmallTicket test should return true if amount less than minBet * smallTicketValueRatio" duration="0"/>
+        <testCase name="MiniSeDieBot tests isSmallTicket test should return false if amount greater than minBet * smallTicketValueRatio" duration="1"/>
+        <testCase name="MiniSeDieBot tests convertAmountToChip test should return correct chip" duration="0"/>
+        <testCase name="MiniSeDieBot tests convertAmountToChip test should return correct chip if amount nearby" duration="0"/>
+        <testCase name="MiniSeDieBot tests convertAmountToChip test should return minBet if amount less than minBet" duration="1"/>
+        <testCase name="MiniSeDieBot tests getTotalBetAmount test should return correct amount" duration="0"/>
+        <testCase name="MiniSeDieBot tests getMaxBet test should return the max value of small ticket if not reach smallTicketRatio" duration="1"/>
+        <testCase name="MiniSeDieBot tests getMaxBet test betChoice is mainOpts should return the lowest-valued between bot_maxbet and choice_maxbet if already passed smallTicketRatio" duration="0"/>
+        <testCase name="MiniSeDieBot tests getMaxBet test betChoice is subOpts should return totalBetAmount * subOptRatio if already passed smallTicketRatio" duration="1"/>
+        <testCase name="MiniSeDieBot tests getMaxBet test betChoice is rareOpts should return minBet * 10 if already passed smallTicketRatio" duration="0"/>
+        <testCase name="MiniSeDieBot tests getBetChoice test should return main choices when main choices have less than 90% bet amount" duration="1"/>
+    </file>
+</testExecutions>

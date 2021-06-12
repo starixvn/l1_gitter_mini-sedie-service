@@ -1,7 +1,7 @@
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
-export default class VipSeDiePlaceBetConsumer extends Core.BaseEventConsumers.PlaceBetConsumer {
+export default class MiniSeDiePlaceBetConsumer extends Core.BaseEventConsumers.PlaceBetConsumer {
     composeBettingTimeValidationCriteria() {
         const configs = this.gameData.gameConfigs;
         const shakeThePlateTime = this.definition.durations.placingBets + this.definition.durations.shakeThePlateDuration;
