@@ -20,7 +20,6 @@ gameData.gameConfigs = {
         white3: 1000,
         red4: 100,
         white4: 100,
-        red2: 2000,
     },
     minbet: 1,
     bot_maxbet: 1000,
@@ -247,6 +246,51 @@ describe("MiniSeDieBot tests", () => {
 
             // assert
             expect(bot.mainOpts).toContain(choice);
+        });
+    });
+
+    describe("placeBet test", () => {
+        it("should not place bet in locking time", async () => {
+            // arrange
+            gameData.remainingTime = chance.integer({ min: 0, max: definition.durations.lockingBet });
+            const bot = new MiniSeDieBot(definition, gameData, publisher, userInfosRepository);
+            const botPlayer = { id: "23" };
+
+            // act
+            await bot.placeBet(botPlayer);
+
+            // assert
+            expect(bot.smallTickets).toEqual(0);
+            expect(bot.getAllBetAmount()).toEqual(0);
+        });
+
+        it("should be small ticket firstly", async () => {
+            // arrange
+            gameData.remainingTime = chance.integer({ min: definition.durations.lockingBet + 1, max: definition.durations.placingBets });
+            const bot = new MiniSeDieBot(definition, gameData, publisher, userInfosRepository);
+            const botPlayer = { id: "23" };
+
+            // act
+            await bot.placeBet(botPlayer);
+
+            // assert
+            expect(bot.smallTickets).toEqual(1);
+            expect(bot.getAllBetAmount()).toBeGreaterThan(0);
+        });
+
+        it("should NOT be small ticket if reached ratio", async () => {
+            // arrange
+            gameData.remainingTime = chance.integer({ min: definition.durations.lockingBet + 1, max: definition.durations.placingBets });
+            const bot = new MiniSeDieBot(definition, gameData, publisher, userInfosRepository);
+            bot.smallTickets = 1;
+            bot.totalTickets = 1;
+            const botPlayer = { id: "23" };
+
+            // act
+            await bot.placeBet(botPlayer);
+
+            // assert
+            expect(bot.smallTickets).toEqual(1);
         });
     });
 });
