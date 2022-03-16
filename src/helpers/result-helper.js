@@ -29,3 +29,7 @@ export const getSettlementResult = (roundResult) => {
         return result;
     }, {});
 };
+
+export const generateRawResultForMd5 = (roundResult) => {
+    return `{${+roundResult.red1}${+roundResult.red2}${+roundResult.red3}${+roundResult.red4}}`;
+};
