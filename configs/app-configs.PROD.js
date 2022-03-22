@@ -72,4 +72,5 @@ export default {
         "http://mini.gamesaba.com",
         "https://mini.gamesaba.com",
     ],
+    enableMsgpackParser: false,
 };
