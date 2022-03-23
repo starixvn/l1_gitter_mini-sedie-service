@@ -116,6 +116,6 @@ describe("generateRawResultForMd5", () => {
         const result = generateRawResultForMd5(roundResult);
 
         // Assert
-        expect(result).toBe("{1001}");
+        expect(result).toBe("{🔴⚪⚪🔴}");
     });
 });

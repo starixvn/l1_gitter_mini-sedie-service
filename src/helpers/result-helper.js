@@ -30,6 +30,12 @@ export const getSettlementResult = (roundResult) => {
     }, {});
 };
 
+const formatUnicode = (isRed) => {
+    return isRed ? "🔴" : "⚪";
+};
+
 export const generateRawResultForMd5 = (roundResult) => {
-    return `{${+roundResult.red1}${+roundResult.red2}${+roundResult.red3}${+roundResult.red4}}`;
+    return `{${formatUnicode(roundResult.red1)}${formatUnicode(roundResult.red2)}${formatUnicode(roundResult.red3)}${formatUnicode(
+        roundResult.red4
+    )}}`;
 };
