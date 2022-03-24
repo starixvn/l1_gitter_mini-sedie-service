@@ -48,95 +48,105 @@ describe("composeBettingTimeValidationCriteria tests", () => {
         },
     });
 
-    it("should return placeBetNextRound notice if game was disabled", () => {
-        // arrange
-        gameData.gameConfigs.enabled = false;
-        const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
+    describe("when game was disabled", () => {
+        it("should return placeBetNextRound notice", () => {
+            // arrange
+            gameData.gameConfigs.enabled = false;
+            const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
 
-        // act
-        var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
+            // act
+            var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
 
-        // assert
-        expect(criterions).not.toBeEmpty();
-        expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
-            failure: true,
-            notice: { errorCode: helpers.noticeHelper.placeBetNextRound },
+            // assert
+            expect(criterions).not.toBeEmpty();
+            expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
+                failure: true,
+                notice: { errorCode: helpers.noticeHelper.placeBetNextRound },
+            });
         });
     });
 
-    it("should return cannotPlaceBet notice if bet comes in settlement time", () => {
-        // arrange
-        gameData.gameConfigs.enabled = true;
-        gameData.remainingTime = chance.integer({
-            min: gameDefinition.durations.placingBets,
-            max: gameDefinition.durations.placingBets + gameDefinition.durations.shakeThePlateDuration,
-        });
-        const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
+    describe("when bet comes in settlement time", () => {
+        it("should return cannotPlaceBet notice", () => {
+            // arrange
+            gameData.gameConfigs.enabled = true;
+            gameData.remainingTime = chance.integer({
+                min: gameDefinition.durations.placingBets,
+                max: gameDefinition.durations.placingBets + gameDefinition.durations.shakeThePlateDuration,
+            });
+            const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
 
-        // act
-        var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
+            // act
+            var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
 
-        // assert
-        expect(criterions).not.toBeEmpty();
-        expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
-            failure: true,
-            notice: { errorCode: helpers.noticeHelper.cannotPlaceBet },
-        });
-    });
-
-    it("should return placeBetNextRound notice if bet comes in locking bet time", () => {
-        // arrange
-        gameData.gameConfigs.enabled = true;
-        gameData.remainingTime = chance.integer({
-            min: 0,
-            max: gameDefinition.durations.lockingBet - 1,
-        });
-        const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
-
-        // act
-        var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
-
-        // assert
-        expect(criterions).not.toBeEmpty();
-        expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
-            failure: true,
-            notice: { errorCode: helpers.noticeHelper.placeBetNextRound },
+            // assert
+            expect(criterions).not.toBeEmpty();
+            expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
+                failure: true,
+                notice: { errorCode: helpers.noticeHelper.cannotPlaceBet },
+            });
         });
     });
 
-    it("should return placeBetNextRound notice if bet comes in shaking plate time", () => {
-        // arrange
-        gameData.gameConfigs.enabled = true;
-        gameData.remainingTime = chance.integer({
-            min: gameDefinition.durations.placingBets + gameDefinition.durations.shakeThePlateDuration + 1,
-            max: gameDefinition.durations.wholeRound,
-        });
-        const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
+    describe("when bet comes in locking bet time", () => {
+        it("should return placeBetNextRound notice", () => {
+            // arrange
+            gameData.gameConfigs.enabled = true;
+            gameData.remainingTime = chance.integer({
+                min: 0,
+                max: gameDefinition.durations.lockingBet - 1,
+            });
+            const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
 
-        // act
-        var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
+            // act
+            var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
 
-        // assert
-        expect(criterions).not.toBeEmpty();
-        expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
-            failure: true,
-            notice: { errorCode: helpers.noticeHelper.placeBetNextRound },
+            // assert
+            expect(criterions).not.toBeEmpty();
+            expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
+                failure: true,
+                notice: { errorCode: helpers.noticeHelper.placeBetNextRound },
+            });
         });
     });
 
-    it("should not return any failures if valid", () => {
-        // arrange
-        gameData.gameConfigs.enabled = true;
-        gameData.remainingTime = chance.integer({
-            min: gameDefinition.durations.lockingBet + 1,
-            max: gameDefinition.durations.placingBets,
+    describe("when bet comes in shaking plate time", () => {
+        it("should return placeBetNextRound notice", () => {
+            // arrange
+            gameData.gameConfigs.enabled = true;
+            gameData.remainingTime = chance.integer({
+                min: gameDefinition.durations.placingBets + gameDefinition.durations.shakeThePlateDuration + 1,
+                max: gameDefinition.durations.wholeRound,
+            });
+            const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
+
+            // act
+            var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
+
+            // assert
+            expect(criterions).not.toBeEmpty();
+            expect(criterions.filter((x) => x.failure)[0]).toStrictEqual({
+                failure: true,
+                notice: { errorCode: helpers.noticeHelper.placeBetNextRound },
+            });
         });
-        const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
+    });
 
-        // act
-        var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
+    describe("when valid", () => {
+        it("should not return any failures", () => {
+            // arrange
+            gameData.gameConfigs.enabled = true;
+            gameData.remainingTime = chance.integer({
+                min: gameDefinition.durations.lockingBet + 1,
+                max: gameDefinition.durations.placingBets,
+            });
+            const placeBetConsumer = new MiniSeDiePlaceBetConsumer(gameDefinition, gameData);
 
-        // assert
-        expect(criterions.filter((x) => x.failure)).toBeEmpty();
+            // act
+            var criterions = placeBetConsumer.composeBettingTimeValidationCriteria();
+
+            // assert
+            expect(criterions.filter((x) => x.failure)).toBeEmpty();
+        });
     });
 });
