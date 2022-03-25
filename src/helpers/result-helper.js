@@ -30,12 +30,28 @@ export const getSettlementResult = (roundResult) => {
     }, {});
 };
 
-const formatUnicode = (isRed) => {
-    return isRed ? "🔴" : "⚪";
-};
-
 export const generateRawResultForMd5 = (roundResult) => {
-    return `{${formatUnicode(roundResult.red1)}${formatUnicode(roundResult.red2)}${formatUnicode(roundResult.red3)}${formatUnicode(
-        roundResult.red4
-    )}}`;
+    let result = "";
+    const redCount = Object.entries(roundResult)
+        .map((i) => i[1])
+        .filter((i) => i).length;
+    switch (redCount) {
+        case 0:
+            result = "⚪⚪⚪⚪";
+            break;
+        case 1:
+            result = "⚪⚪⚪🔴";
+            break;
+        case 2:
+            result = "🔴🔴⚪⚪";
+            break;
+        case 3:
+            result = "🔴🔴🔴⚪";
+            break;
+        case 4:
+            result = "🔴🔴🔴🔴";
+            break;
+    }
+
+    return `{${result}}`;
 };

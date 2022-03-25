@@ -118,14 +118,64 @@ describe("generateResult tests", () => {
 });
 
 describe("generateRawResultForMd5", () => {
-    it("convert result to raw result for md5", () => {
-        // Arrange
-        const roundResult = { red1: true, red2: false, red3: false, red4: true };
+    describe("when zero red", () => {
+        it("should format result in unicode", () => {
+            // Arrange
+            const roundResult = { red1: false, red2: false, red3: false, red4: false };
 
-        // Act
-        const result = generateRawResultForMd5(roundResult);
+            // Act
+            const result = generateRawResultForMd5(roundResult);
 
-        // Assert
-        expect(result).toBe("{🔴⚪⚪🔴}");
+            // Assert
+            expect(result).toBe("{⚪⚪⚪⚪}");
+        });
+    });
+    describe("when 1 red", () => {
+        it("should format result in unicode", () => {
+            // Arrange
+            const roundResult = { red1: false, red2: false, red3: true, red4: false };
+
+            // Act
+            const result = generateRawResultForMd5(roundResult);
+
+            // Assert
+            expect(result).toBe("{⚪⚪⚪🔴}");
+        });
+    });
+    describe("when 2 reds", () => {
+        it("should format result in unicode", () => {
+            // Arrange
+            const roundResult = { red1: false, red2: true, red3: true, red4: false };
+
+            // Act
+            const result = generateRawResultForMd5(roundResult);
+
+            // Assert
+            expect(result).toBe("{🔴🔴⚪⚪}");
+        });
+    });
+    describe("when 3 reds", () => {
+        it("should format result in unicode", () => {
+            // Arrange
+            const roundResult = { red1: false, red2: true, red3: true, red4: true };
+
+            // Act
+            const result = generateRawResultForMd5(roundResult);
+
+            // Assert
+            expect(result).toBe("{🔴🔴🔴⚪}");
+        });
+    });
+    describe("when 4 reds", () => {
+        it("should format result in unicode", () => {
+            // Arrange
+            const roundResult = { red1: true, red2: true, red3: true, red4: true };
+
+            // Act
+            const result = generateRawResultForMd5(roundResult);
+
+            // Assert
+            expect(result).toBe("{🔴🔴🔴🔴}");
+        });
     });
 });
