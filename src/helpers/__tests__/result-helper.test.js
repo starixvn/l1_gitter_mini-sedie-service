@@ -1,4 +1,4 @@
-import { generateResult, getSettlementResult, generateRawResultForMd5 } from "../result-helper";
+import { generateResult, getSettlementResult, generateRawResultForHash } from "../result-helper";
 
 describe("getSettlementResult tests", () => {
     describe("when results have ONE red", () => {
@@ -117,14 +117,14 @@ describe("generateResult tests", () => {
     });
 });
 
-describe("generateRawResultForMd5", () => {
+describe("generateRawResultForHash", () => {
     describe("when zero red", () => {
         it("should format result in unicode", () => {
             // Arrange
             const roundResult = { red1: false, red2: false, red3: false, red4: false };
 
             // Act
-            const result = generateRawResultForMd5(roundResult);
+            const result = generateRawResultForHash(roundResult);
 
             // Assert
             expect(result).toBe("{⚪⚪⚪⚪}");
@@ -136,10 +136,10 @@ describe("generateRawResultForMd5", () => {
             const roundResult = { red1: false, red2: false, red3: true, red4: false };
 
             // Act
-            const result = generateRawResultForMd5(roundResult);
+            const result = generateRawResultForHash(roundResult);
 
             // Assert
-            expect(result).toBe("{⚪⚪⚪🔴}");
+            expect(result).toBe("{🔴⚪⚪⚪}");
         });
     });
     describe("when 2 reds", () => {
@@ -148,7 +148,7 @@ describe("generateRawResultForMd5", () => {
             const roundResult = { red1: false, red2: true, red3: true, red4: false };
 
             // Act
-            const result = generateRawResultForMd5(roundResult);
+            const result = generateRawResultForHash(roundResult);
 
             // Assert
             expect(result).toBe("{🔴🔴⚪⚪}");
@@ -160,7 +160,7 @@ describe("generateRawResultForMd5", () => {
             const roundResult = { red1: false, red2: true, red3: true, red4: true };
 
             // Act
-            const result = generateRawResultForMd5(roundResult);
+            const result = generateRawResultForHash(roundResult);
 
             // Assert
             expect(result).toBe("{🔴🔴🔴⚪}");
@@ -172,7 +172,7 @@ describe("generateRawResultForMd5", () => {
             const roundResult = { red1: true, red2: true, red3: true, red4: true };
 
             // Act
-            const result = generateRawResultForMd5(roundResult);
+            const result = generateRawResultForHash(roundResult);
 
             // Assert
             expect(result).toBe("{🔴🔴🔴🔴}");

@@ -1,5 +1,5 @@
 import { MiniSeDieBets } from "./mini-sedie-bets";
 import MiniSeDieRounds from "./mini-sedie-rounds";
-import MiniSedieMd5s from "./mini-sedie-md5s";
+import MiniSedieResults from "./mini-sedie-results";
 
-export { MiniSeDieBets, MiniSeDieRounds, MiniSedieMd5s };
+export { MiniSeDieBets, MiniSeDieRounds, MiniSedieResults };
