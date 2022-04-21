@@ -8145,15 +8145,15 @@ sc-api-client@^1.3.0:
     axios "^0.19.2"
     openid-client "^3.15.9"
 
-sc-base-apis@1.15.1:
-  version "1.15.1"
-  resolved "https://npm.lumigame.com/sc-base-apis/-/sc-base-apis-1.15.1.tgz#456a1b2929cb0556ae789c46f7d4f8cfa5926a2d"
-  integrity sha512-YfZz8aTOrt50Jo5T5CCBISi/o64yGrDJ9JFLlG2IqGV48aVNqSQ2fHTsjEkozM0/AUy1wVFdIOe226rrwoBCPA==
+sc-base-apis@1.14.1:
+  version "1.14.1"
+  resolved "http://npm.lumigame.com/sc-base-apis/-/sc-base-apis-1.14.1.tgz#bceec564fb8a3e8d50759a5321a6e70b6207a823"
+  integrity sha512-H1Dk3QXlAotXVADmZyV4xUCS/K/kTVUTekezxy0Sh0XHq2LQsVjJEZW0xnnmagCuFCQh7n1GqvkxbRSW77voZw==
   dependencies:
     moment "^2.27.0"
     sc-api-client "^1.3.0"
     sc-base-database "1.9.1"
-    sc-common "^1.8.0"
+    sc-common "^1.7.0"
 
 sc-base-database@1.9.1:
   version "1.9.1"
@@ -8174,9 +8174,9 @@ sc-common@^1.6.0:
     mongoose-long "^0.3.0"
     numeral "^2.0.6"
 
-sc-common@^1.8.0:
+sc-common@^1.7.0:
   version "1.8.0"
-  resolved "https://npm.lumigame.com/sc-common/-/sc-common-1.8.0.tgz#125ce2efae5a7ddb328981790766f9ee8e5be359"
+  resolved "http://npm.lumigame.com/sc-common/-/sc-common-1.8.0.tgz#125ce2efae5a7ddb328981790766f9ee8e5be359"
   integrity sha512-QVUpBms9Vt0Bmm2GcFaf44pYQvbXB7odI+vZJqnr0ainWWLgVynK4wxcKn6y7bNhTxP6MGIX8lFHcpgilXn3eQ==
   dependencies:
     "@sentry/node" "^5.19.1"
@@ -8185,10 +8185,10 @@ sc-common@^1.8.0:
     mongoose-long "^0.3.0"
     numeral "^2.0.6"
 
-sc-game-base@2.4.1:
-  version "2.4.1"
-  resolved "https://npm.lumigame.com/sc-game-base/-/sc-game-base-2.4.1.tgz#a18f45c6c87f5e6d0396ef0fbfe440dcec9a898f"
-  integrity sha512-4r9o1Z/N/JE0oFWuNUhxmvCTCEDbCz5ZX7S4e+DuKIo7eo3e2KzDbqMrYBwpW5bkfznPabG5lIkTVlbvZt0Ozg==
+sc-game-base@2.2.2-beta.2:
+  version "2.2.2-beta.2"
+  resolved "http://npm.lumigame.com/sc-game-base/-/sc-game-base-2.2.2-beta.2.tgz#54b4f6a696ad4f878769dc4845fce4287758d3f8"
+  integrity sha512-0JszjtjQwxahkAlfp1Glu91vldLlNUajYQYztzNw1upzbuCmNlRk3Y3JL+TOP03rvsDqNW8mPZpmvkWN8E3CWA==
   dependencies:
     awilix "^4.3.1"
     axios "^0.20.0"
@@ -8202,9 +8202,9 @@ sc-game-base@2.4.1:
     mongoose "^5.9.25"
     morgan "^1.10.0"
     openid-client "^4.2.0"
-    sc-base-apis "1.15.1"
+    sc-base-apis "1.14.1"
     sc-base-database "1.9.1"
-    sc-common "^1.8.0"
+    sc-common "^1.7.0"
     socket.io "^4.1.2"
     socket.io-prom-metrics "^1.0.3"
 
